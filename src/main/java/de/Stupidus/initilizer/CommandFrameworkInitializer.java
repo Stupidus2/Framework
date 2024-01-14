@@ -10,7 +10,7 @@ public class CommandFrameworkInitializer {
     public CommandFrameworkInitializer(JavaPlugin plugin) {
         String packageName = getClass().getPackage().getName();
 
-        for (Class<? extends CommandFramework> clazz : new Reflections("de.Stupidus.commands").getSubTypesOf(CommandFramework.class)) {
+        for (Class<? extends CommandFramework> clazz : new Reflections().getSubTypesOf(CommandFramework.class)) {
             try {
                 CommandFramework commandPlugin = clazz.getDeclaredConstructor().newInstance();
                 plugin.getCommand(commandPlugin.getCommandName().name()).setExecutor(commandPlugin);

@@ -35,7 +35,6 @@ public class ExampleCommand extends CommandFramework {
     }
 
     @Override
-    @TabComplete
     public List<String> tabCompleter(CommandSender sender, String[] args, List<String> tabCompleter) {
         return tabCompleter;
     }

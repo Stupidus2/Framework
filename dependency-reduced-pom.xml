@@ -26,8 +26,6 @@
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>com.github.Stupidus2:InventoryAPI</include>
-                  <include>com.github.Stupidus2:FileSystem</include>
                   <include>net.oneandone.reflections8:reflections8</include>
                   <include>org.javassist:javassist</include>
                 </includes>
@@ -39,8 +37,8 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>16</source>
-          <target>16</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
     </plugins>
