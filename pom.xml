@@ -42,18 +42,6 @@
             <version>1.20-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.github.Stupidus2</groupId>
-            <artifactId>FileSystem</artifactId>
-            <version>1.11</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.Stupidus2</groupId>
-            <artifactId>InventoryAPI</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>net.oneandone.reflections8</groupId>
             <artifactId>reflections8</artifactId>
@@ -92,8 +80,6 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>com.github.Stupidus2:InventoryAPI</include>
-                                    <include>com.github.Stupidus2:FileSystem</include>
                                     <include>net.oneandone.reflections8:reflections8</include>
                                     <include>org.javassist:javassist</include>
                                 </includes>
@@ -106,8 +92,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
 
