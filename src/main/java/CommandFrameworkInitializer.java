@@ -1,5 +1,3 @@
-package de.Stupidus.initilizer;
-
 import de.Stupidus.Framework.CommandFramework;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections8.Reflections;
