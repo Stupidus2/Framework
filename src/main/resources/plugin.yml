@@ -1,0 +1,10 @@
+main: de.Stupidus.main.Main
+version: 1.0
+name: CommandFramework
+api-version: 1.20
+
+commands:
+  heal:
+    description: /heal
+  test:
+    description: /test
