@@ -58,7 +58,7 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
 
             //Initializing subCommands
             if (commandMethods.containsKey(subCommand.toLowerCase())) {
-                //Checking if player is null for @TargetPlayer
+                System.out.println(commandMethods.keySet().toString());
 
                 Method method = commandMethods.get(subCommand);
                 if (method != null) {
@@ -69,6 +69,7 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
                         sender.sendMessage(ChatColor.RED + permissionPlaceholer);
                         return true;
                     }
+                    //Checking if player is null for @TargetPlayer
                     Integer target = targetPlayer.get(subCommand);
                     if (target != null) {
                         if (Bukkit.getPlayer(args[target]) == null) {

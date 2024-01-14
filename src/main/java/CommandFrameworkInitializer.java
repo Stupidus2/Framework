@@ -3,7 +3,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections8.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
-
 public class CommandFrameworkInitializer {
     public CommandFrameworkInitializer(JavaPlugin plugin) {
         String packageName = getClass().getPackage().getName();
