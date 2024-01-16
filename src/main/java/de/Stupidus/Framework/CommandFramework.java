@@ -54,6 +54,7 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
         }
 
         if (args.length > 0) {
+
             String subCommand = args[0].toLowerCase();
 
             //Initializing subCommands
@@ -91,8 +92,8 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
-                }  else {
-                    System.out.println(ChatColor.RED+"Method is null!: Command Executer");
+                } else {
+                    System.out.println(ChatColor.RED + "Method is null!: Command Executer");
                 }
             } else {
                 sender.sendMessage(ChatColor.RED + commandFW.unknowCommand());
@@ -130,6 +131,15 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
         for (Method method : getClass().getDeclaredMethods()) {
             if (method.isAnnotationPresent(Register.class)) {
                 return method.getAnnotation(Register.class);
+            }
+        }
+        return null;
+    }
+
+    private TabComplete findTabAnnotation() {
+        for (Method method : getClass().getDeclaredMethods()) {
+            if (method.isAnnotationPresent(TabComplete.class)) {
+                return method.getAnnotation(TabComplete.class);
             }
         }
         return null;
@@ -269,14 +279,23 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
 
         if (tab.containsKey(commandFW.name())) {
             Method method = tab.get(commandFW.name());
-            if(method != null) {
-                try {
-                    method.invoke(this, sender, args, tabCompletee);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    throw new RuntimeException(e);
+            if (args.length == 1) {
+                String[] subCommand = commandMethods.keySet().toArray(new String[0]);
+                for (int i = 0; i < subCommand.length; i++) {
+                    tabCompletee.add(subCommand[i]);
                 }
-            } else {
-                System.out.println(ChatColor.RED+"Method is null!: TabCompleter");
+            } else if (args.length >= 2) {
+
+                if (method != null) {
+                    try {
+                        method.invoke(this, sender, args, tabCompletee);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Method is null!: TabList");
+                }
+
             }
         } else {
 
@@ -287,9 +306,10 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
                 }
             }
         }
-            return tabCompletee;
-        }
-    public List<String> tabCompleter(CommandSender sender, String[] args, List<String> tabCompleter){
+        return tabCompletee;
+    }
+
+    public List<String> tabCompleter(CommandSender sender, String[] args, List<String> tabCompleter) {
         return tabCompleter;
     }
 }
