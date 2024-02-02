@@ -59,8 +59,6 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
 
             //Initializing subCommands
             if (commandMethods.containsKey(subCommand.toLowerCase())) {
-                System.out.println(commandMethods.keySet().toString());
-
                 Method method = commandMethods.get(subCommand);
                 if (method != null) {
                     String permission = commandPermission.get(subCommand);
