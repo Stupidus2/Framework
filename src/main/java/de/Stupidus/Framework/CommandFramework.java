@@ -271,36 +271,36 @@ public abstract class CommandFramework implements CommandExecutor, Listener, Tab
         commandMethods = findCommandMethods();
     }
 
-    @Override
+@Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
         List<String> tabCompletee = new ArrayList<>();
 
         if (tab.containsKey(commandFW.name())) {
             Method method = tab.get(commandFW.name());
             if (args.length == 1) {
-                String[] subCommand = commandMethods.keySet().toArray(new String[0]);
-                for (int i = 0; i < subCommand.length; i++) {
-                    tabCompletee.add(subCommand[i]);
+                if (sender.hasPermission(commandFW.permission())) {
+                    String[] subCommand = commandMethods.keySet().toArray(new String[0]);
+                    tabCompletee.addAll(Arrays.asList(subCommand));
                 }
             } else if (args.length >= 2) {
-
-                if (method != null) {
-                    try {
-                        method.invoke(this, sender, args, tabCompletee);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        throw new RuntimeException(e);
+                if (sender.hasPermission(commandFW.permission())) {
+                    if (method != null) {
+                        try {
+                            method.invoke(this, sender, args, tabCompletee);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Method is null!: TabList");
                     }
-                } else {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Method is null!: TabList");
                 }
-
             }
         } else {
 
             if (args.length == 1) {
-                String[] subCommand = commandMethods.keySet().toArray(new String[0]);
-                for (int i = 0; i < subCommand.length; i++) {
-                    tabCompletee.add(subCommand[i]);
+                if (sender.hasPermission(commandFW.permission())) {
+                    String[] subCommand = commandMethods.keySet().toArray(new String[0]);
+                    tabCompletee.addAll(Arrays.asList(subCommand));
                 }
             }
         }
